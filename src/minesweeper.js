@@ -23,9 +23,23 @@ const { NotImplementedError } = require('../lib');
  *  [1, 1, 1]
  * ]
  */
-function minesweeper(/* matrix */) {
-  // Remove line below and write your code here
-  throw new NotImplementedError('Not implemented');
+function minesweeper(matrix) {
+  const result = matrix.map(row => row.map(() => 0));
+  for (let i = 0; i < matrix.length; i++) {
+    for (let j = 0; j < matrix[i].length; j++) {
+      if (matrix[i][j]) {
+        for (let x = Math.max(0, i - 1); x <= Math.min(matrix.length - 1, i + 1); x++) {
+          for (let y = Math.max(0, j - 1); y <= Math.min(matrix[i].length - 1, j + 1); y++) {
+            if (x !== i || y !== j) {
+              result[x][y]++;
+            }
+          }
+        }
+      }
+    }
+  }
+  return result;
+  // remove line with error and write your code here
 }
 
 module.exports = {
